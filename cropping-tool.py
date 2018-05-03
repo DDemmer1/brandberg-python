@@ -15,7 +15,7 @@ mypath = 'C:\Users\Dennis\Desktop\img'
 save_path = 'C:\Users\Dennis\Desktop\save-img'
 
 # endung der ausgeschnitten Bilder
-extension = 'roi.jpeg'
+extension = 'roi.jpg'
 
 # Auf true stellen wenn ausgeschnittenes Bild nochmal angezeigt werden soll
 show_ROI = False
@@ -97,7 +97,7 @@ for i in file_images:
             refPt = []
             cv2.destroyWindow(i)
             break
-            
+
         # r = remove
         elif key == ord("r"):
             image = clone.copy()
@@ -117,7 +117,11 @@ for i in file_images:
 
         # ROI abspeichern
         index = str(rect)
-        cv2.imwrite(save_name + "-" + index + extension , roi)
+        # cv2.imwrite(save_name + "-" + index + extension , roi)
+        dim = (50, 50)
+        roi = cv2.resize(roi, dim)
+        interpolation = cv2.INTER_AREA
+        cv2.imwrite(index + extension , roi)
         os.chdir(mypath)
 
         if show_ROI:
